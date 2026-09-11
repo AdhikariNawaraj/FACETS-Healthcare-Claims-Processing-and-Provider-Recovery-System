@@ -427,44 +427,80 @@ The recovery, collection-letter, and write-off procedures are not necessarily ex
 Database Architecture:
 
                  SOURCE / CLAIM INPUT
+                 
                          |
+                         
                          v
+                         
 +------------------------------------------------+
+
 |                  FACETS_STG                    |
+
 |                                                |
 | STG_CMC_CLCL   Claim Header                    |
+
 | STG_CMC_CDML   Claim Lines                     |
+
 | STG_CMC_MEME   Member Information              |
+
 | STG_CMC_CLPR   Provider Information            |
+
 +------------------------------------------------+
+
                          |
+                         
                   Validation / ETL
+                  
                          |
+                         
                          v
 +------------------------------------------------+
+
 |                    FACETS                      |
 |                                                |
+
 | CMC_MEME   Member Master                       |
+
 | CMC_PRPR   Provider Master                     |
+
 | CMC_PRWM   Provider Warning/Window             |
+
 | CMC_CLCL   Claim Header                        |
+
 | CMC_CDML   Claim Detail                        |
+
 | CMC_ACPR   Accounts Receivable / Recovery      |
+
 | CMC_ACRH   Recovery History                    |
+
 | CMC_CLOV   Claim-to-Recovery Offset            |
+
+
 +------------------------------------------------+
+
                          |
+                         
                          v
 +------------------------------------------------+
+
 |                FACETS_Custom                   |
+
 |                                                |
+
 | CW_RJCT_CLCL       Rejected Claims             |
+
 | CW_HEADER          Collection Current State    |
+
 | CW_STATUS          Collection History          |
+
 | CLM_JOB_STEP_LOG   Processing Audit            |
+
 | CLM_JOB_ERR_LOG    Error Audit                 |
+
 | Stored Procedures / Processing Logic           |
+
 +------------------------------------------------+
+
 
 
 
@@ -484,19 +520,31 @@ Central Logging Framework:
 
 
 
+
 Claim Status Lifecycle:
 The status codes make the complete claim lifecycle much easier to understand:
 
 | Status | Meaning                            | Stage                               |
+
 | -----: | ---------------------------------- | ----------------------------------- |
+
 |   `16` | Claims Submitted                   | Staging                             |
+
 |   `11` | Member Not Found                   | Member validation                   |
+
 |   `12` | Provider Not Found                 | Provider validation                 |
+
 |   `13` | Service Date Error                 | Preprocessing                       |
+
 |   `14` | Provider Tax Error                 | Preprocessing                       |
+
 |   `15` | Errored Out Claim                  | Final staging validation            |
+
 |   `01` | Loaded to Core                     | Successful adjudication/pre-payment |
+
 |   `02` | Successful Payment                 | Payment                             |
+
 |   `91` | Payment Rejection / zero-paid case | Payment                             |
+
 
 This demonstrates an important design principle: a claim does not simply pass or fail. Its status tells operations exactly where it is in the lifecycle and, when rejected, approximately where processing failed.
