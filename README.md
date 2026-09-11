@@ -86,14 +86,19 @@ Final End-to- End Flow:
              3. SERVICE DATE VALIDATION
                  USP_CLM_SVCDT_VAL
                          |
+                         
                 +--------+--------+
+                
                 |                 |
+                
               PASS               FAIL
+              
                 |                 |
                 |            STATUS = 13
                 |            Invalid Service
                 |            Date Span
                 |                 |
+                
                 |                 v
                 |            REJECT CLAIM
                 |
@@ -102,14 +107,20 @@ Final End-to- End Flow:
                 
                 4. TAX ID VALIDATION
                     USP_CLM_TAXID_VAL
+                    
                          |
+                         
                 +--------+--------+
                 |                 |
               PASS               FAIL
+              
                 |                 |
+                
                 |            STATUS = 14
                 |            Invalid Tax ID
+                
                 |                 |
+                
                 |                 v
                 |            REJECT CLAIM
                 |
@@ -128,6 +139,7 @@ Final End-to- End Flow:
              
              STAGING -> CORE
              USP_CLM_STG_TO_CORE
+             
                      |
                      v
                      
@@ -136,14 +148,18 @@ Final End-to- End Flow:
                      |
           +----------+----------+
           |                     |
+          
           v                     v
+          
    CMC_CLCL                    CMC_CDML
  Claim Header                Claim Detail
+ 
           |
           v
           
        PAYMENT PROCESS
      USP_CLM_PYMT_PRCS
+     
           |
           v
           
@@ -173,8 +189,10 @@ Final End-to- End Flow:
     +----+--------------------+
     |                         |
     
+    
 No Reduction              Reduction/
                           Overpayment
+                          
                           
     |                         |
     v                         v
@@ -200,11 +218,15 @@ Payment Successful      Recovery Receivable
                  |                         |
                  
                  v                         v
+                 
           ACPR_RECOV_AMT            ACPR_NET_AMT
              increases                decreases
                  |                         |
+                 
                  +------------+------------+
+                 
                               |
+                              
                      Is NET AMT = $0?
                      
                          /          \
