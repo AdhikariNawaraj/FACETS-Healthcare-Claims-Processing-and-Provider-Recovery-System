@@ -1,0 +1,37 @@
+CREATE Database FACETS_Custom
+USE [FACETS_Custom]
+GO
+
+DROP SEQUENCE IF EXISTS [dbo].[CLCL_ID_1031SEQ]
+GO
+
+CREATE SEQUENCE [dbo].[CLCL_ID_1031SEQ] 
+ AS [int]
+ START WITH 1
+ INCREMENT BY 1
+ MINVALUE 1
+ MAXVALUE 9999999
+ CYCLE 
+ CACHE 
+GO
+
+CREATE TYPE [dbo].[STG_CMC_CDML_TYPE] AS TABLE
+(
+	[CDML_CHG_AMT] [money] NULL,
+	[CDML_FROM_DT] [date] NULL,
+	[CDML_TO_DT] [date] NULL,
+	[DIAG_CD] [varchar](7) NULL,
+	[PROC_CD] [varchar](7) NULL
+)
+GO
+
+CREATE TYPE [dbo].[STG_CMC_CLPR_TYPE] AS TABLE
+(
+	[CLPR_TYPE] [varchar](2) NULL,
+	[CLPR_TAX] [varchar](20) NULL,
+	[CLPR_NPI] [varchar](50) NULL,
+	[CLPR_STATE] [varchar](50) NULL
+)
+GO
+
+
