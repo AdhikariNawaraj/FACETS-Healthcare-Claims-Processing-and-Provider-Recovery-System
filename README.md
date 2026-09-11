@@ -524,9 +524,13 @@ Central Logging Framework:
 Claim Status Lifecycle:
 The status codes make the complete claim lifecycle much easier to understand:
 
-| Status | Meaning                            | Stage                               |
+| Status   `        | Meaning                 | Stage                             |
+
+
 
 | -----: | ---------------------------------- | ----------------------------------- |
+
+
 
 |   `16` | Claims Submitted                   | Staging                             |
 
