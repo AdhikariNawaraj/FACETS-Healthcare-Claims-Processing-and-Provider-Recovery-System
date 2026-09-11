@@ -82,6 +82,7 @@ Final End-to- End Flow:
           |          REJECT CLAIM
           |
           v
+          
              3. SERVICE DATE VALIDATION
                  USP_CLM_SVCDT_VAL
                          |
@@ -97,6 +98,8 @@ Final End-to- End Flow:
                 |            REJECT CLAIM
                 |
                 v
+
+                
                 4. TAX ID VALIDATION
                     USP_CLM_TAXID_VAL
                          |
@@ -111,6 +114,7 @@ Final End-to- End Flow:
                 |            REJECT CLAIM
                 |
                 v
+                
           FINAL STAGING VALIDATION
                          |
              +-----------+-----------+
@@ -121,6 +125,7 @@ Final End-to- End Flow:
              |                  Errored Out
              |
              v
+             
              STAGING -> CORE
              USP_CLM_STG_TO_CORE
                      |
@@ -144,25 +149,36 @@ Final End-to- End Flow:
           
     Calculate line-level:
       CHARGE
+      
          |
+         
       DEDUCTION
+      
          |
     +----+-----+
     |          |
+    
   ALLOW     DISALLOW
     |          |
+    
     +----+-----+
+    
          |
+         
          v
          
   Update Claim Payable
          |
+         
     +----+--------------------+
     |                         |
+    
 No Reduction              Reduction/
                           Overpayment
+                          
     |                         |
     v                         v
+    
 STATUS = 02                 CMC_ACPR
 Payment Successful      Recovery Receivable
                               |
@@ -175,11 +191,14 @@ Payment Successful      Recovery Receivable
                               v
                     USP_CLM_PYMT_RECOV
                               |
+                              
                      Provider makes
                      partial recovery
                               |
+                              
                  +------------+------------+
                  |                         |
+                 
                  v                         v
           ACPR_RECOV_AMT            ACPR_NET_AMT
              increases                decreases
@@ -187,70 +206,101 @@ Payment Successful      Recovery Receivable
                  +------------+------------+
                               |
                      Is NET AMT = $0?
+                     
                          /          \
                        YES           NO
+                       
                         |             |
+                        
                         v             v
+                        
                   ACPR_STS = I    ACPR_STS = A
                      Closed          Active
+                     
                         |
+                        
                         v
                     CMC_ACRH
                  Recovery History
 
+
               OUTSTANDING RECOVERIES
                         |
                         v
+                        
               COLLECTION LETTER PROCESS
                  USP_CLM_COLL_LTR
                         |
+                        
                         v
                   CW_HEADER
                  Current State
                         |
+                        
                         v
+                        
                    CW_STATUS
                   Status History
                         |
+                        
               +---------+---------+
               |                   |
+              
               v                   v
+              
          PAR PROVIDER        NON-PAR / VA
+         
               |                   |
+              
               +---------+---------+
                         |
+                        
                   Initial Letter
+                  
                         |
                   Follow-up Letters
+                  
                         |
                   Collection Stops
                         |
+                        
               +---------+---------+
               |                   |
+              
         Provider Pays       Balance Remains
               |                   |
+              
               v                   v
         Recovery SP          WRITE-OFF
                          USP_CLM_PYMT_WROFF
+                         
                                   |
                                   v
+                                  
                          Provider-level
                          threshold check
                                   |
+                                  
                                   v
                           ACPR_WOFF_AMT
                              increases
                                   |
+                                  
                           ACPR_NET_AMT = 0
                                   |
+                                  
                            ACPR_STS = I
+                           
                                   |
                        +----------+----------+
                        |                     |
+                       
                        v                     v
+                       
                     CMC_ACRH             CW_STATUS
                 Write-off History       WRITE-OFF
                                              |
+                                             
                                              v
                                          CW_HEADER
                                            CLOSE
