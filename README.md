@@ -125,6 +125,7 @@ Final End-to- End Flow:
              USP_CLM_STG_TO_CORE
                      |
                      v
+                     
               STATUS = 01
               Claim Loaded
                      |
@@ -135,10 +136,12 @@ Final End-to- End Flow:
  Claim Header                Claim Detail
           |
           v
+          
        PAYMENT PROCESS
      USP_CLM_PYMT_PRCS
           |
           v
+          
     Calculate line-level:
       CHARGE
          |
@@ -151,6 +154,7 @@ Final End-to- End Flow:
     +----+-----+
          |
          v
+         
   Update Claim Payable
          |
     +----+--------------------+
@@ -163,6 +167,7 @@ STATUS = 02                 CMC_ACPR
 Payment Successful      Recovery Receivable
                               |
                               v
+                              
                      +-------------------+
                      | PROVIDER RECOVERY |
                      +-------------------+
